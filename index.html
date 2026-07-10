@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<!-- Save this entire file locally as exactly: index.html -->
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Derick Taverne | Data Analyst</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Phosphor Icons for premium, clean UI icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        bgMain: '#FAFAFA',
+                        bgSecondary: '#FFFFFF',
+                        textMain: '#111111',
+                        textMuted: '#666666',
+                        borderMain: '#E5E5E5',
+                        accent: '#000000'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            background-color: #FAFAFA;
+            color: #111111;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        ::selection {
+            background: #111111;
+            color: #FFFFFF;
+        }
+
+        /* Glassmorphism for Top Nav */
+        .glass-nav {
+            background: rgba(250, 250, 250, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        /* Subtle grid background for the Hero section */
+        .hero-bg {
+            background-image: 
+                linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center center;
+        }
+
+        .project-card {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .project-image-container {
+            overflow: hidden;
+        }
+
+        .project-image-container img {
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover .project-image-container img {
+            transform: scale(1.05);
+        }
+        
+        /* Modern Underline Hover */
+        .hover-underline {
+            position: relative;
+        }
+        .hover-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: currentColor;
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+        .hover-underline:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+    </style>
+</head>
+<body class="font-sans relative">
+
+    <!-- TOP NAVIGATION -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300 py-4 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Logo/Name -->
+            <a href="#" class="text-lg font-bold tracking-tight text-textMain">
+                Derick Taverne<span class="text-textMuted">.</span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-textMuted">
+                <a href="#about" class="hover:text-textMain transition-colors">About</a>
+                <a href="#skills" class="hover:text-textMain transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-textMain transition-colors">Projects</a>
+                <a href="#experience" class="hover:text-textMain transition-colors">Experience</a>
+            </div>
+
+            <!-- Socials & Resume -->
+            <div class="flex items-center gap-4">
+                <a href="https://github.com/dericktav-code" target="_blank" class="text-textMuted hover:text-textMain transition-colors" aria-label="GitHub">
+                    <i class="ph ph-github-logo text-2xl"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/derick-taverne" target="_blank" class="text-textMuted hover:text-textMain transition-colors" aria-label="LinkedIn">
+                    <i class="ph ph-linkedin-logo text-2xl"></i>
+                </a>
+                <a href="TaverneDerick-Resume.docx.pdf" download class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-black rounded-full hover:bg-gray-800 transition-colors">
+                    Resume
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 md:px-12 hero-bg overflow-hidden flex items-center min-h-[90vh]">
+        <div class="max-w-7xl mx-auto w-full relative z-10">
+            <div class="max-w-4xl gs-reveal">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 border border-gray-200 text-xs font-mono text-textMuted mb-8">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    Available for new opportunities
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.05] text-textMain mb-6">
+                    Data Analyst building scalable pipelines.
+                </h1>
+                
+                <p class="text-lg md:text-xl text-textMuted font-light max-w-2xl mb-10 leading-relaxed">
+                    Based in New York. I specialize in the architecture of relational databases, data normalization, and predictive modeling to transform complex datasets into actionable business insights.
+                </p>
+
+                <div class="flex flex-wrap items-center gap-4">
+                    <a href="#projects" class="px-8 py-4 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-colors flex items-center gap-2">
+                        View Projects <i class="ph ph-arrow-down-right text-lg"></i>
+                    </a>
+                    <a href="mailto:dericktav@gmail.com" class="px-8 py-4 bg-white border border-gray-200 text-black rounded-full font-medium hover:bg-gray-50 transition-colors">
+                        Get in touch
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Decorative subtle gradient blob -->
+        <div class="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="relative z-20 bg-bgMain">
+
+        <!-- SKILLS SECTION -->
+        <section id="skills" class="py-24 px-6 md:px-12 bg-white border-y border-gray-100">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row md:justify-between items-start md:items-end mb-16 gs-reveal">
+                    <div>
+                        <h2 class="text-sm font-mono text-textMuted uppercase tracking-wider mb-2">01 // Expertise</h2>
+                        <h3 class="text-3xl md:text-4xl font-bold tracking-tight">Technical Arsenal</h3>
+                    </div>
+                    <p class="text-textMuted max-w-sm mt-4 md:mt-0 font-light text-sm">
+                        Treating every business problem as a query waiting to be optimized.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 gs-reveal">
+                    <!-- Category 1 -->
+                    <div class="p-8 rounded-2xl bg-gray-50 border border-gray-100">
+                        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm mb-6">
+                            <i class="ph ph-code text-2xl text-textMain"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-4">Languages</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm text-textMuted">Python</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm text-textMuted">SQL</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm text-textMuted">C++</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 2 -->
+                    <div class="p-8 rounded-2xl bg-gray-50 border border-gray-100">
+                        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm mb-6">
+                            <i class="ph ph-database text-2xl text-textMain"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-4">Engineering</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm text-textMuted">Data Pipelines</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm text-textMuted">ER Modeling</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm text-textMuted">RDBMS</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm text-textMuted">3NF Normalization</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 3 -->
+                    <div class="p-8 rounded-2xl bg-gray-50 border border-gray-100">
+                        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm mb-6">
+                            <i class="ph ph-chart-line-up text-2xl text-textMain"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-4">Analytics</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm text-textMuted">Tableau</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm text-textMuted">Power Query</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm text-textMuted">Predictive Modeling</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm text-textMuted">Excel Dashboards</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects" class="py-24 px-6 md:px-12 bg-bgMain">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 gs-reveal">
+                    <h2 class="text-sm font-mono text-textMuted uppercase tracking-wider mb-2">02 // Selected Work</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold tracking-tight">Recent Projects</h3>
+                </div>
+
+                <div class="space-y-16">
+                    
+                    <!-- Project 1 -->
+                    <div class="project-card bg-white rounded-3xl p-6 md:p-8 border border-gray-100 flex flex-col lg:flex-row gap-12 items-center gs-reveal">
+                        <!-- Project Image -->
+                        <div class="w-full lg:w-1/2 aspect-[4/3] rounded-2xl project-image-container relative overflow-hidden bg-gray-50 border border-gray-100">
+                            <img src="https://placehold.co/800x600/f8fafc/334155?text=NVIDIA+Financial+Dashboard" alt="NVIDIA Dashboard Preview" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x600/eeeeee/999999?text=Image+Unavailable'">
+                        </div>
+                        
+                        <div class="w-full lg:w-1/2">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-gray-100 text-xs font-mono text-textMuted mb-6">
+                                June 2026
+                            </div>
+                            <h4 class="text-3xl font-bold tracking-tight mb-4">NVIDIA Performance Modeling</h4>
+                            <p class="text-textMuted font-light leading-relaxed mb-8">
+                                Sourced and merged 9 years of financial fundamentals with US macroeconomic indicators using Power Query to build a centralized analytical dataset. Designed an interactive Excel dashboard with dynamic pivot charts and a conditionally formatted correlation matrix to visualize economic impacts on company margins.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-8">
+                                <span class="px-3 py-1 bg-gray-50 border border-gray-200 rounded-md text-xs font-mono text-textMuted">Excel</span>
+                                <span class="px-3 py-1 bg-gray-50 border border-gray-200 rounded-md text-xs font-mono text-textMuted">Regression</span>
+                                <span class="px-3 py-1 bg-gray-50 border border-gray-200 rounded-md text-xs font-mono text-textMuted">Power Query</span>
+                            </div>
+                            
+                            <a href="https://github.com/dericktav-code" target="_blank" class="inline-flex items-center gap-2 text-sm font-semibold hover-underline">
+                                View on GitHub <i class="ph ph-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card bg-white rounded-3xl p-6 md:p-8 border border-gray-100 flex flex-col lg:flex-row-reverse gap-12 items-center gs-reveal">
+                        <!-- Project Image -->
+                        <div class="w-full lg:w-1/2 aspect-[4/3] rounded-2xl project-image-container relative overflow-hidden bg-gray-50 border border-gray-100">
+                            <img src="https://placehold.co/800x600/f8fafc/334155?text=Pet+Shelter+ERD+%26+Database" alt="Pet Shelter Database Preview" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x600/eeeeee/999999?text=Image+Unavailable'">
+                        </div>
+                        
+                        <div class="w-full lg:w-1/2">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-gray-100 text-xs font-mono text-textMuted mb-6">
+                                Feb - May 2026
+                            </div>
+                            <h4 class="text-3xl font-bold tracking-tight mb-4">Pet Shelter Database</h4>
+                            <p class="text-textMuted font-light leading-relaxed mb-8">
+                                Engineered a relational database system using SQL to transition a local animal rescue organization from disparate manual spreadsheets to a centralized platform. Constructed ER models and executed data normalization up to 3NF to structure complex relationships across animal medical records, adoptions, and staff scheduling.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-8">
+                                <span class="px-3 py-1 bg-gray-50 border border-gray-200 rounded-md text-xs font-mono text-textMuted">SQL</span>
+                                <span class="px-3 py-1 bg-gray-50 border border-gray-200 rounded-md text-xs font-mono text-textMuted">ER Modeling</span>
+                                <span class="px-3 py-1 bg-gray-50 border border-gray-200 rounded-md text-xs font-mono text-textMuted">3NF</span>
+                            </div>
+
+                            <a href="https://github.com/dericktav-code" target="_blank" class="inline-flex items-center gap-2 text-sm font-semibold hover-underline">
+                                View on GitHub <i class="ph ph-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE SECTION -->
+        <section id="experience" class="py-24 px-6 md:px-12 bg-white border-y border-gray-100">
+            <div class="max-w-4xl mx-auto gs-reveal">
+                <div class="mb-16">
+                    <h2 class="text-sm font-mono text-textMuted uppercase tracking-wider mb-2">03 // Career Path</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold tracking-tight">Experience & Education</h3>
+                </div>
+
+                <div class="space-y-12 relative before:absolute before:inset-0 before:ml-2 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-200 before:to-transparent">
+                    
+                    <!-- Job 1 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                        <div class="flex items-center justify-center w-5 h-5 rounded-full border-4 border-white bg-black shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 ml-0 md:ml-auto md:mr-auto absolute md:static left-0 -translate-x-[9px] md:translate-x-0"></div>
+                        
+                        <div class="w-[calc(100%-2.5rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:border-gray-300 transition-colors ml-auto md:ml-0">
+                            <div class="flex flex-col mb-2">
+                                <span class="text-xs font-mono text-textMuted mb-1">Jun 2026 - Present</span>
+                                <h4 class="text-xl font-bold text-textMain">Data Analytics Apprentice</h4>
+                                <h5 class="text-sm font-medium text-textMuted">NYC Tech Talent Pipeline | Manhattan, NY</h5>
+                            </div>
+                            <p class="text-sm text-textMuted font-light leading-relaxed mt-4">
+                                Engineered end-to-end data pipelines and executed EDA using Python and SQL to clean complex datasets. Developed interactive data visualizations and executive dashboards.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Job 2 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                        <div class="flex items-center justify-center w-5 h-5 rounded-full border-4 border-white bg-gray-300 group-hover:bg-black transition-colors shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 ml-0 md:ml-auto md:mr-auto absolute md:static left-0 -translate-x-[9px] md:translate-x-0"></div>
+                        
+                        <div class="w-[calc(100%-2.5rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:border-gray-300 transition-colors ml-auto md:ml-0">
+                            <div class="flex flex-col mb-2">
+                                <span class="text-xs font-mono text-textMuted mb-1">Jun 2022 - Aug 2022</span>
+                                <h4 class="text-xl font-bold text-textMain">Digital Marketing Intern</h4>
+                                <h5 class="text-sm font-medium text-textMuted">Lishawn's Consulting | Brooklyn, NY</h5>
+                            </div>
+                            <p class="text-sm text-textMuted font-light leading-relaxed mt-4">
+                                Identified key audience engagement drivers across digital platforms, improving marketing strategy effectiveness and increasing client brand presence by 35%.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                        <div class="flex items-center justify-center w-5 h-5 rounded-full border-4 border-white bg-gray-300 group-hover:bg-black transition-colors shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 ml-0 md:ml-auto md:mr-auto absolute md:static left-0 -translate-x-[9px] md:translate-x-0"></div>
+                        
+                        <div class="w-[calc(100%-2.5rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:border-gray-300 transition-colors ml-auto md:ml-0">
+                            <div class="flex flex-col mb-2">
+                                <span class="text-xs font-mono text-textMuted mb-1">Exp. Dec 2027</span>
+                                <h4 class="text-xl font-bold text-textMain">BBA, Computer Information Systems</h4>
+                                <h5 class="text-sm font-medium text-textMuted">Baruch College | New York, NY</h5>
+                            </div>
+                            <p class="text-sm text-textMuted font-light leading-relaxed mt-4">
+                                Minor: Computer Science <br> GPA: 3.50/4.00
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER / CONTACT -->
+        <footer class="bg-bgMain py-24 px-6 md:px-12">
+            <div class="max-w-7xl mx-auto flex flex-col items-center text-center gs-reveal">
+                <h2 class="text-4xl md:text-6xl font-bold tracking-tight mb-8">Let's build something.</h2>
+                <p class="text-textMuted max-w-md mx-auto mb-12 font-light">
+                    Currently available for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+                </p>
+                
+                <a href="mailto:dericktav@gmail.com" class="px-10 py-5 bg-black text-white rounded-full font-medium text-lg hover:bg-gray-800 transition-all hover:scale-105 active:scale-95 mb-16 shadow-xl shadow-black/10">
+                    Say Hello <i class="ph ph-paper-plane-tilt ml-2"></i>
+                </a>
+
+                <div class="w-full border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-textMuted">
+                    <p>© 2026 Derick Taverne. All rights reserved.</p>
+                    
+                    <div class="flex items-center gap-6">
+                        <a href="tel:3477256545" class="hover:text-textMain transition-colors">347-725-6545</a>
+                        <a href="https://github.com/dericktav-code" target="_blank" class="hover:text-textMain transition-colors flex items-center gap-1">
+                            <i class="ph ph-github-logo text-lg"></i> GitHub
+                        </a>
+                        <a href="https://www.linkedin.com/in/derick-taverne" target="_blank" class="hover:text-textMain transition-colors flex items-center gap-1">
+                            <i class="ph ph-linkedin-logo text-lg"></i> LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // Initialize GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Smooth fade and slide up for elements
+        gsap.utils.toArray('.gs-reveal').forEach(function(elem) {
+            gsap.fromTo(elem, 
+                { y: 40, opacity: 0 }, 
+                {
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: "top 85%", 
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: "power3.out"
+                }
+            );
+        });
+
+        // Add subtle scroll effect to Top Nav background
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-sm');
+                nav.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+            } else {
+                nav.classList.remove('shadow-sm');
+                nav.style.backgroundColor = 'rgba(250, 250, 250, 0.8)';
+            }
+        });
+    </script>
+</body>
+</html>
